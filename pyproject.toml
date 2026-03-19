@@ -1,0 +1,15 @@
+[project]
+name = "fbi-api-interactive"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fbi-data-api",
+    "streamlit>=1.29.0",
+]
+
+[tool.uv]
+override-dependencies = [
+    "pandas<3.0.0"
+]
