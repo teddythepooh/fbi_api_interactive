@@ -40,7 +40,7 @@ def render_results(df: pd.DataFrame, export_as: str) -> None:
 
     with col3:
         st.download_button(
-            label = "⬇ Export as CSV",
+            label = "Export",
             data = df.to_csv(index = False),
             file_name = f"{export_as}.csv",
             mime = "text/csv",
