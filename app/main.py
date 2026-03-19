@@ -34,7 +34,7 @@ def render_results(df: pd.DataFrame, export_as: str) -> None:
         st.markdown(f"""
             <div class="metric-card">
                 <div class="label">Columns</div>
-                <div class="value">{len(df.columns)}</div>
+                <div class="">{len(df.columns)}</div>
             </div>
         """, unsafe_allow_html = True)
 
@@ -189,7 +189,7 @@ with tab_stats:
         year_start = st.number_input(
             label = "Start Year",
             min_value = 2016,
-            max_value = 2024,
+            max_value = 2025,
             value = 2024,
             step = 1,
         )
@@ -198,7 +198,7 @@ with tab_stats:
         year_end = st.number_input(
             label = "End Year",
             min_value = 2016,
-            max_value = 2024,
+            max_value = 2025,
             value = 2024,
             step = 1,
         )
