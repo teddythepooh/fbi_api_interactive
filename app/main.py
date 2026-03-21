@@ -100,14 +100,14 @@ with st.sidebar:
 st.markdown("""
 <div class="main-header">
     <h1>fbi-data-api Demo</h1>
-    <p>This is a demo of <a href="https://pypi.org/project/fbi-data-api/" target="_blank">fbi-data-api</a>'s pre-release version (v0.5.0), 
+    <p>This is a demo of <a href="https://pypi.org/project/fbi-data-api/" target="_blank">fbi-data-api</a>'s pre-release version (v0.6.0), 
     a Python package for querying data from the FBI Crime Data API. Feel free to export the queries below for your needs. Better yet, pump up
     my download numbers by using fbi-data-api directly!</p>
     <p>Visit the <a href="https://github.com/teddythepooh/fbi_api" target="_blank">GitHub repo</a> for issues and suggestions.</p>
 </div>
 """, unsafe_allow_html = True)
 
-tab_metadata, tab_stats = st.tabs(["Metadata", "Crime Statistics"])
+tab_metadata, tab_agency_metadata, tab_stats = st.tabs(["Metadata", "Agency Metadata", "Crime Statistics"])
 
 # Metadata Tab
 with tab_metadata:
@@ -151,6 +151,90 @@ with tab_metadata:
         render_results(
             df = st.session_state["metadata"],
             export_as = f"fbi_metadata_{state_label.lower()}",
+        )
+        
+# Agency Metadata Tab
+with tab_agency_metadata:
+    st.markdown("### Agency Metadata")
+    st.markdown(
+        "Get the number of officers in a law enforcement agency and the total population they serve."
+    )
+
+    st.markdown("<br>", unsafe_allow_html = True)
+
+    col_ori, col_run = st.columns([3, 1])
+
+    with col_ori:
+        agency_ori_raw = st.text_area(
+            label = "Enter one ORI per line. The Quick Reference section outlines the ORIs of the 10 largest US cities.",
+            placeholder = "ILCPD0000\nNY0303000",
+            height = 120,
+        )
+
+    with col_run:
+        st.markdown("<div style='height:28px'></div>", unsafe_allow_html = True)
+        run_agency = st.button("Run Query", key = "run_agency", use_container_width = True, type = "primary")
+
+    col_year_start, col_year_end = st.columns(2)
+
+    with col_year_start:
+        agency_year_start = st.number_input(
+            label = "Start Year",
+            min_value = 2016,
+            max_value = 2024,
+            value = 2024,
+            step = 1,
+            key = "agency_year_start",
+        )
+
+    with col_year_end:
+        agency_year_end = st.number_input(
+            label = "End Year",
+            min_value = 2016,
+            max_value = 2024,
+            value = 2024,
+            step = 1,
+            key = "agency_year_end",
+        )
+
+    agency_ori_list = [o.strip() for o in agency_ori_raw.strip().splitlines() if o.strip()]
+    agency_year_list = list(range(int(agency_year_start), int(agency_year_end) + 1))
+
+    if run_agency:
+        errors = []
+
+        if not agency_ori_list:
+            errors.append("Enter at least one ORI code.")
+        if agency_year_start > agency_year_end:
+            errors.append("Start Year must be <= End Year.")
+
+        if errors:
+            for err in errors:
+                st.error(err)
+        else:
+            with st.spinner(f"Fetching agency metrics for **{len(agency_ori_list)} ORI(s)** ({agency_year_start}–{agency_year_end})..."):
+                try:
+                    client = build_client(api_key_input)
+                    df_agency = client.get_agency_metrics(
+                        ori = agency_ori_list,
+                        year = agency_year_list,
+                    )
+                    st.session_state["agency_metrics"] = df_agency
+                    st.session_state["agency_metrics_params"] = {
+                        "oris": agency_ori_list,
+                        "years": agency_year_list,
+                    }
+
+                except Exception as e:
+                    st.error(f"Query failed: {e}")
+
+    if "agency_metrics" in st.session_state:
+        params = st.session_state["agency_metrics_params"]
+        year_range = f"{min(params['years'])}-{max(params['years'])}"
+        st.success(f"Showing agency metrics for: **{len(params['oris'])} ORI(s)** · **{year_range}**")
+        render_results(
+            df = st.session_state["agency_metrics"],
+            export_as = f"fbi_agency_metrics_{year_range}",
         )
 
 # Crime Statistics Tab

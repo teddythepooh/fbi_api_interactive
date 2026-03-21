@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "fbi-data-api",
+    "fbi-data-api==0.6.0",
     "streamlit>=1.29.0",
 ]
 

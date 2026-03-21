@@ -170,13 +170,13 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "fbi-data-api" },
+    { name = "fbi-data-api", specifier = "==0.6.0" },
     { name = "streamlit", specifier = ">=1.29.0" },
 ]
 
 [[package]]
 name = "fbi-data-api"
-version = "0.5.0"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pandas" },
@@ -185,9 +185,9 @@ dependencies = [
     { name = "requests" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/70/e9/78c9420a03650b81b80ba77acbcba8b23c4dd27216d81a43f8e170d8deb4/fbi_data_api-0.5.0.tar.gz", hash = "sha256:cd571d726ad90b85701b0e1f2daaa254747da04ed02e0dd1a9c18f6feb7f5304", size = 436083, upload-time = "2026-03-18T21:11:09.9Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/70/86bcbcd9aa96e7ec89fca021ea6591fcb02048d036e837dd5e18fa931f56/fbi_data_api-0.6.0.tar.gz", hash = "sha256:e14a85781776976d8fdb84b780f2e2ccbb36954a0cdd1000e441cbbd27b60f33", size = 51153, upload-time = "2026-03-21T06:55:59.569Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a1/82/33739bf2111bf3ed54f0d8da3fb0de0b2f7356c545573c538dc636a2dc80/fbi_data_api-0.5.0-py3-none-any.whl", hash = "sha256:20daa111403ce926f8d9e1d03ddd579221c00e1a116f662ffe600e78a7393173", size = 5883, upload-time = "2026-03-18T21:11:08.819Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/ae/4b0b6757dfac87c3df105e1e177921c760a746943f15f45ddd0aa3af6597/fbi_data_api-0.6.0-py3-none-any.whl", hash = "sha256:177f699597c8550a0f892a79ae73088adeae24fc00321434552ef3a1a50d9e8a", size = 6178, upload-time = "2026-03-21T06:56:00.295Z" },
 ]
 
 [[package]]
