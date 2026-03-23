@@ -100,9 +100,8 @@ with st.sidebar:
 st.markdown("""
 <div class="main-header">
     <h1>fbi-data-api Demo</h1>
-    <p>This is a demo of <a href="https://pypi.org/project/fbi-data-api/" target="_blank">fbi-data-api</a>'s pre-release version (v0.6.0), 
-    a Python package for querying data from the FBI Crime Data API. Feel free to export the queries below for your needs. Better yet, pump up
-    my download numbers by using fbi-data-api directly!</p>
+    <p>This is a demo of <a href="https://pypi.org/project/fbi-data-api/" target="_blank">fbi-data-api</a>'s (v1.0.0), 
+    a Python package for programmatically extracting statistics from 19,000+ law enforcement agencies in the FBI Crime Data API. Before using this dashboard, do not forget the sign-up for an API key (linked in the sidebar): it takes < 1 minute! Feel free to export the queries below for your needs. Better yet, use fbi-data-api directly!</p>
     <p>Visit the <a href="https://github.com/teddythepooh/fbi_api" target="_blank">GitHub repo</a> for issues and suggestions.</p>
 </div>
 """, unsafe_allow_html = True)
