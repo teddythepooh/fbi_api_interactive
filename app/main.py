@@ -156,7 +156,7 @@ with tab_metadata:
 with tab_agency_metadata:
     st.markdown("### Agency Metadata")
     st.markdown(
-        "Get the number of officers in a law enforcement agency and the total population they serve."
+        "Get the number of officers in a law enforcement agency (ORI) and the total population they serve."
     )
 
     st.markdown("<br>", unsafe_allow_html = True)
